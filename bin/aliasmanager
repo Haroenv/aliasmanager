@@ -5,7 +5,7 @@ require_relative '../lib/aliasmanager'
 
 command = ARGV[0]
 
-manager = AliasManager.new(20)
+manager = AliasManager.new(5)
 
 case command
 when 'unaliased'
@@ -16,6 +16,10 @@ when 'total'
   manager.total
 when 'sequences'
   manager.most_used_consecutive_commands
+when 'subcommands'
+  manager.most_used_with_subcommands
+when '--command'
+  manager.most_used_options(ARGV[1])
 else
   manager.most_used_commands
 end

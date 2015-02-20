@@ -33,6 +33,26 @@ class AliasManager
     puts formatted_top_list(command_sequences)
   end
 
+  def most_used_with_subcommands
+    commands_with_subcommands = all_commands.select do |command|
+      command.split(" ").count >= 2
+    end.map do |command|
+      command.split(" ")[0..2].join(' ')
+    end
+
+    puts formatted_top_list(commands_with_subcommands)
+  end
+
+  def most_used_options(diagnosed_command)
+    all_options = all_commands.select do |command|
+      command.start_with?(diagnosed_command)
+    end.map do |command|
+      command.split(" ")[0..1].join(' ')
+    end
+
+    puts formatted_top_list(all_options)
+  end
+
   private
 
   def formatted_top_list(commands)

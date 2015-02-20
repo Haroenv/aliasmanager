@@ -13,7 +13,7 @@ class AliasManager
 
     # lines of zsh_history have the format `: 1424438183:0;which zsh`
     def history
-      @history ||= File.readlines File.expand_path "~/.zsh_history"
+      @history ||= `tail -n3000 ~/.zsh_history`.split("\n")
     end
 
   end
