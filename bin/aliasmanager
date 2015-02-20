@@ -2,27 +2,19 @@
 
 
 require_relative '../lib/aliasmanager'
+require_relative '../lib/aliasmanager/diagnose'
 
 command = ARGV[0]
 
 manager = AliasManager.new(cutoff: 5, history_size: 3000)
 
 case command
-when 'unaliased'
-  manager.most_used_commands_without_aliases
-when 'aliased'
-  manager.most_used_aliases
-when 'total'
-  manager.total
-when 'sequences'
-  manager.most_used_consecutive_commands
-when 'subcommands'
-  manager.most_used_with_subcommands
 when '--command'
-  manager.most_used_options(ARGV[1])
+ puts  manager.most_used_options(ARGV[1])
 when 'diagnose'
+  AliasManager::Diagnose.new.execute
 
 else
-  manager.most_used_commands
+  puts manager.most_used_commands
 end
 
