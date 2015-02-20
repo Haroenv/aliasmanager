@@ -2,8 +2,9 @@ require_relative 'aliasmanager/zsh_history'
 
 class AliasManager
 
-  def initialize(cutoff = 0)
+  def initialize(cutoff: 0, history_size: 3000)
     @cutoff = cutoff
+    @history_size = history_size
   end
 
   # Reads the output of `alias -L` in stdin
@@ -91,7 +92,7 @@ class AliasManager
   end
 
   def all_commands
-    @all_commands ||= ZshHistory.new.command_history
+    @all_commands ||= ZshHistory.new(@history_size).command_history
   end
 
   def all_aliases

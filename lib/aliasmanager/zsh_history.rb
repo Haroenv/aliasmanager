@@ -1,6 +1,10 @@
 class AliasManager
   class ZshHistory
 
+    def initialize(history_size = 3000)
+      @history_size = history_size
+    end
+
     def command_history
       @command_history ||= history.select do |command|
         command.start_with?(':')
@@ -13,7 +17,7 @@ class AliasManager
 
     # lines of zsh_history have the format `: 1424438183:0;which zsh`
     def history
-      @history ||= `tail -n3000 ~/.zsh_history`.split("\n")
+      @history ||= `tail -n#{@history_size} ~/.zsh_history`.split("\n")
     end
 
   end

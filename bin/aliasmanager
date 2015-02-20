@@ -5,7 +5,7 @@ require_relative '../lib/aliasmanager'
 
 command = ARGV[0]
 
-manager = AliasManager.new(5)
+manager = AliasManager.new(cutoff: 5, history_size: 3000)
 
 case command
 when 'unaliased'
@@ -20,6 +20,8 @@ when 'subcommands'
   manager.most_used_with_subcommands
 when '--command'
   manager.most_used_options(ARGV[1])
+when 'diagnose'
+
 else
   manager.most_used_commands
 end
