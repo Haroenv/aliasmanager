@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
+require_relative '../lib/aliasmanager'
 
+history = File.readlines File.expand_path "~/.zsh_history"
+
+full_commands = history.map do |line| line.split(";").last.gsub("\n", "") end
+
+commands = full_commands.map do |full_commands| full_commands.split(" ").first end
+
+
+def top_list(commands)
+  commands.group_by { |c| c}
+          .each_with_object({}) do |(command, occurences), command_counts|
+            command_counts[command] = occurences.count
+          end
+          .to_a.sort do |a,b| b[1] <=> a[1] end
+end
+
+command_counts = top_list(commands)
+
+
+command_counts.each do |command_count|
+  puts "#{command_count[1]} #{command_count[0]}"
+end
