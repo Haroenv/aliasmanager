@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-
-# Reads the output of `alias -L` in stdin
-
-
