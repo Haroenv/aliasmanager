@@ -1,4 +1,6 @@
-aliasdoctor
+This is still a work in early progress.
+
+aliasmanager
 ===
 
 aliasdoctor helps you diagnose your alias usage, and answer the following questions:
